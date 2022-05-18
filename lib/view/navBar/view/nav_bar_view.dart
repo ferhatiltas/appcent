@@ -58,42 +58,7 @@ class NavBarView extends BaseView<NavBarController> {
                   icon: const Icon(Icons.search))
             ],
       title: controller.isTappedSearch
-          ? SizedBox(
-              width: 100.w,
-              height: 5.h,
-              child: Center(
-                child: TextFormField(
-                  style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-                  keyboardType: TextInputType.text,
-                  cursorColor: Colors.black,
-                  controller: controller.searchTextController,
-                  onChanged: (value) {
-                    controller.filteredPhotoList(value);
-                  },
-                  decoration: InputDecoration(
-                    labelStyle: TextStyle(color: Colors.black, fontSize: 12.sp),
-                    prefixIcon: const Icon(Icons.search),
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        controller.clearTexFieldAndUpdateList();
-                      },
-                      icon: const Icon(Icons.clear),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(15.5),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(15.5),
-                    ),
-                    hintStyle: TextStyle(color: Colors.grey, fontSize: 12.sp),
-                    filled: true,
-                    fillColor: Colors.grey.shade100,
-                  ),
-                ),
-              ),
-            )
+          ? _buildSearchBar()
           : Text(
               'Appcent',
               style: TextStyle(
@@ -102,5 +67,45 @@ class NavBarView extends BaseView<NavBarController> {
               ),
             ),
     );
+  }
+
+  SizedBox _buildSearchBar() {
+    return SizedBox(
+            width: 100.w,
+            height: 5.h,
+            child: Center(
+              child: TextFormField(
+                style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                autofocus: true,
+                keyboardType: TextInputType.text,
+                cursorColor: Colors.black,
+                controller: controller.searchTextController,
+                onChanged: (value) {
+                  controller.filteredPhotoList(value);
+                },
+                decoration: InputDecoration(
+                  labelStyle: TextStyle(color: Colors.black, fontSize: 12.sp),
+                  prefixIcon: const Icon(Icons.search),
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      controller.clearTexFieldAndUpdateList();
+                    },
+                    icon: const Icon(Icons.clear),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(15.5),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(15.5),
+                  ),
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 12.sp),
+                  filled: true,
+                  fillColor: Colors.grey.shade100,
+                ),
+              ),
+            ),
+          );
   }
 }
